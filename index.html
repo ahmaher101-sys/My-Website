@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maher Alsheikh | Developer & VFX Artist</title>
+    
+    <!-- Tailwind CSS for rapid structural styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter for a modern, clean look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan: '#00f2fe',
+                            blue: '#4facfe',
+                            dark: '#0b0c10',
+                            glass: 'rgba(255, 255, 255, 0.03)',
+                            glassBorder: 'rgba(255, 255, 255, 0.08)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Glassmorphism, Animations, and Scroll Effects -->
+    <style>
+        body {
+            background-color: #0b0c10;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Background Glows */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 242, 254, 0.3);
+            top: 10%;
+            left: -10%;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(79, 172, 254, 0.2);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: var(--brand-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(0, 242, 254, 0.15);
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+        }
+
+        /* Text Gradients */
+        .text-gradient {
+            background: linear-gradient(to right, #e2e8f0, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .text-gradient-accent {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0c10; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2); 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4); 
+        }
+    </style>
+</head>
+<body class="antialiased relative selection:bg-brand-blue selection:text-white">
+
+    <!-- Ambient Background -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="glass-panel rounded-2xl px-6 py-3 flex justify-between items-center">
+                <a href="#" class="text-xl font-bold tracking-wider text-white">MA<span class="text-brand-cyan">.</span></a>
+                <div class="hidden md:flex gap-6 text-sm font-medium text-slate-300">
+                    <a href="#about" class="hover:text-brand-cyan transition-colors">About</a>
+                    <a href="#skills" class="hover:text-brand-cyan transition-colors">Skills</a>
+                    <a href="#experience" class="hover:text-brand-cyan transition-colors">Experience</a>
+                    <a href="#projects" class="hover:text-brand-cyan transition-colors">Projects</a>
+                    <a href="#education" class="hover:text-brand-cyan transition-colors">Education</a>
+                </div>
+                <a href="mailto:ahmaher101@gmail.com" class="text-sm font-medium px-5 py-2 rounded-full border border-white/10 hover:border-brand-cyan/50 hover:bg-brand-cyan/10 transition-all duration-300">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex items-center justify-center relative pt-20 px-6">
+        <div class="max-w-4xl mx-auto text-center z-10 reveal active">
+            <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-xs font-medium text-brand-cyan tracking-widest uppercase">
+                Montreal, Canada
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                Hi, I'm <span class="text-white">Maher Alsheikh</span>.<br>
+                <span class="text-gradient-accent text-4xl md:text-5xl lg:text-6xl mt-2 inline-block">Software Programmer & Web Developer</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-6 font-light leading-relaxed">
+                Passionate about building clean, efficient, and dynamic software solutions. I blend technical logic with creative problem-solving to deliver high-quality web and software experiences.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-10 text-slate-300 text-sm">
+                <a href="mailto:ahmaher101@gmail.com" class="flex items-center gap-2 hover:text-brand-cyan transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    ahmaher101@gmail.com
+                </a>
+                <span class="hidden sm:inline text-white/20">|</span>
+                <a href="tel:4382705050" class="flex items-center gap-2 hover:text-brand-cyan transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    438-270-5050
+                </a>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="px-8 py-3 rounded-full bg-white text-brand-dark font-medium hover:bg-slate-200 transition-colors duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                    Explore Work
+                </a>
+                <a href="#about" class="px-8 py-3 rounded-full border border-white/20 glass-panel hover:bg-white/5 transition-all duration-300">
+                    More About Me
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="glass-panel rounded-3xl p-8 md:p-12 lg:p-16 reveal">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Logic, Syntax & <br><span class="text-gradient-accent">Communication</span></h2>
+                        <div class="space-y-4 text-slate-300 leading-relaxed font-light">
+                            <p>
+                                I am an aspiring programmer currently studying at <strong class="text-white font-medium">TAV College</strong>. My journey into tech is driven by a profound curiosity for how systems operate and a desire to build seamless digital experiences.
+                            </p>
+                            <p>
+                                Whether I am developing a full-stack web application, setting up robust game servers, or diving into new languages like Rust, I approach every challenge with meticulous attention to detail and a problem-solving mindset.
+                            </p>
+                            <div class="pt-4 border-t border-white/10 mt-6">
+                                <h3 class="text-white font-medium mb-4">Spoken Languages</h3>
+                                <div class="flex flex-wrap gap-3">
+                                    <span class="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2">🇬🇧 English <span class="text-slate-400 text-xs">(Fluent)</span></span>
+                                    <span class="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2">🇸🇦 Arabic <span class="text-slate-400 text-xs">(Fluent)</span></span>
+                                    <span class="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2">🇫🇷 French <span class="text-slate-400 text-xs">(Conversational)</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative h-full min-h-[300px] rounded-2xl overflow-hidden glass-card border border-white/10 flex items-center justify-center p-8 group">
+                        <!-- Abstract Geometric Representation -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-cyan/10 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10 w-full h-full flex flex-col items-center justify-center gap-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-full border border-brand-cyan/30 flex items-center justify-center bg-brand-cyan/5 shadow-[0_0_15px_rgba(0,242,254,0.1)]">
+                                    <svg class="w-8 h-8 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                </div>
+                                <div class="w-12 h-[1px] bg-white/20"></div>
+                                <div class="w-16 h-16 rounded-full border border-purple-500/30 flex items-center justify-center bg-purple-500/5 shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+                                    <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                </div>
+                            </div>
+                            <p class="text-sm tracking-widest uppercase text-slate-400 font-medium text-center">Design <span class="text-white px-2">&</span> Development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 px-6 relative border-t border-white/5">
+        <div class="max-w-5xl mx-auto reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">Technical <span class="text-gradient-accent">Arsenal</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">A comprehensive toolkit spanning core programming languages, modern web technologies, and essential software environments.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Software Languages -->
+                <div class="glass-card p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        Software Languages
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-medium text-slate-200 hover:border-brand-cyan/50 hover:bg-brand-cyan/10 transition-colors cursor-default">Python</span>
+                        <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-medium text-slate-200 hover:border-brand-cyan/50 hover:bg-brand-cyan/10 transition-colors cursor-default">JavaScript</span>
+                        <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-medium text-slate-200 hover:border-brand-cyan/50 hover:bg-brand-cyan/10 transition-colors cursor-default">Java</span>
+                        <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-medium text-slate-200 hover:border-brand-cyan/50 hover:bg-brand-cyan/10 transition-colors cursor-default">Rust</span>
+                        <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-medium text-slate-200 hover:border-brand-cyan/50 hover:bg-brand-cyan/10 transition-colors cursor-default">HTML5</span>
+                        <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-medium text-slate-200 hover:border-brand-cyan/50 hover:bg-brand-cyan/10 transition-colors cursor-default">CSS</span>
+                    </div>
+                </div>
+
+                <!-- Software Tools -->
+                <div class="glass-card p-8 rounded-2xl delay-100">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Software Tools
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-medium text-slate-200">Git</span>
+                        <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-medium text-slate-200">VS Code</span>
+                        <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-medium text-slate-200">PyCharm</span>
+                    </div>
+                </div>
+
+                <!-- General -->
+                <div class="glass-card p-8 rounded-2xl delay-200">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        General IT
+                    </h3>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan mt-2.5 shrink-0"></span>
+                            <span class="text-sm text-slate-300">Hardware & Software knowledge</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan mt-2.5 shrink-0"></span>
+                            <span class="text-sm text-slate-300">MS Office (Word, Excel, PowerPoint)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 px-6 relative border-t border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">Professional <span class="text-gradient-accent">Experience</span></h2>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Job 1 -->
+                <div class="glass-card rounded-2xl p-8 reveal flex flex-col md:flex-row gap-6 relative overflow-hidden">
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-cyan to-transparent"></div>
+                    <div class="md:w-1/4 shrink-0">
+                        <div class="text-brand-cyan font-bold mb-1">Jan 2023 - Sep 2023</div>
+                        <div class="text-slate-400 text-sm font-medium tracking-wide">Montreal, QC</div>
+                    </div>
+                    <div class="md:w-3/4">
+                        <h3 class="text-2xl font-bold text-white mb-1">Assembleur</h3>
+                        <div class="text-lg text-slate-300 mb-4 font-medium">FuzeHR</div>
+                        <ul class="space-y-2 text-slate-400 font-light text-sm leading-relaxed">
+                            <li class="flex items-start gap-2">
+                                <span class="text-brand-cyan mt-1">▹</span>
+                                Assembled LED lighting fixtures and components for large-scale events and installations.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-brand-cyan mt-1">▹</span>
+                                Followed technical instructions and wiring diagrams to build and wire lighting units precisely.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-brand-cyan mt-1">▹</span>
+                                Proficiently used hand and power tools to assemble complex electronic and mechanical parts.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="glass-card rounded-2xl p-8 reveal delay-100 flex flex-col md:flex-row gap-6 relative overflow-hidden">
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-transparent"></div>
+                    <div class="md:w-1/4 shrink-0">
+                        <div class="text-purple-400 font-bold mb-1">2021 - 2022</div>
+                        <div class="text-slate-400 text-sm font-medium tracking-wide">Montreal, QC</div>
+                    </div>
+                    <div class="md:w-3/4">
+                        <h3 class="text-2xl font-bold text-white mb-1">Technical Support Specialist</h3>
+                        <div class="text-lg text-slate-300 mb-4 font-medium">ScalaCube</div>
+                        <ul class="space-y-2 text-slate-400 font-light text-sm leading-relaxed">
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-400 mt-1">▹</span>
+                                Provided comprehensive technical support to customers for game server setup and configuration.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-400 mt-1">▹</span>
+                                Specialized in troubleshooting complex server issues to ensure optimal uptime and performance.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-400 mt-1">▹</span>
+                                Communicated solutions clearly and effectively through support tickets, live chat, and email.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 relative border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">Featured <span class="text-gradient-accent">Projects</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="glass-card rounded-2xl p-8 reveal delay-100 flex flex-col h-full">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div class="mb-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                        <h3 class="text-2xl font-bold text-white">Roblox Game Developer</h3>
+                        <span class="text-xs font-mono text-brand-cyan bg-brand-cyan/10 px-3 py-1 rounded-full border border-brand-cyan/20 self-start sm:self-auto">2024 - Present</span>
+                    </div>
+                    <p class="text-slate-400 font-light text-sm leading-relaxed flex-grow mt-4">
+                        Independently conceptualized, programmed, and launched two highly successful games on the Roblox platform. Achieved significant player engagement and retention metrics, ultimately leading to the successful acquisition and sale of one of the titles.
+                    </p>
+                    <div class="mt-6 flex flex-wrap gap-2">
+                        <span class="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Luau</span>
+                        <span class="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Game Design</span>
+                        <span class="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Monetization</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card rounded-2xl p-8 reveal delay-200 flex flex-col h-full">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                    </div>
+                    <div class="mb-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                        <h3 class="text-2xl font-bold text-white">Multi-Company Websites</h3>
+                        <span class="text-xs font-mono text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-full border border-emerald-400/20 self-start sm:self-auto">Oct 2025 - Nov 2025</span>
+                    </div>
+                    <p class="text-slate-400 font-light text-sm leading-relaxed flex-grow mt-4">
+                        Acted as a freelance web developer to design, build, and deploy 10-15 distinct websites for various business clients. Delivered modern, responsive designs tailored to each brand, while simultaneously managing complex academic programming projects.
+                    </p>
+                    <div class="mt-6 flex flex-wrap gap-2">
+                        <span class="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-slate-300">HTML5</span>
+                        <span class="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-slate-300">CSS3</span>
+                        <span class="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-slate-300">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications Section -->
+    <section id="education" class="py-24 px-6 relative border-t border-white/5">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">Education & <span class="text-gradient-accent">Certifications</span></h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Academics -->
+                <div class="space-y-6 reveal delay-100">
+                    <h3 class="text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Academic Background</h3>
+                    
+                    <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-transparent"></div>
+                        <h4 class="text-lg font-bold text-white mb-1">AEC in Computer Programming</h4>
+                        <div class="text-brand-cyan text-sm mb-3">TAV College | Sep 2025 - Expected 2027</div>
+                        <p class="text-slate-400 text-sm font-light leading-relaxed">
+                            Comprehensive program covering software engineering principles, algorithms, full-stack development, and modern programming paradigms.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-transparent"></div>
+                        <h4 class="text-lg font-bold text-white mb-1">High School Equivalency</h4>
+                        <div class="text-brand-cyan text-sm mb-3">GED Certificate</div>
+                        <p class="text-slate-400 text-sm font-light leading-relaxed">
+                            Official high school equivalency diploma demonstrating foundational academic competency.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Certs -->
+                <div class="space-y-6 reveal delay-200">
+                    <h3 class="text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Professional Training</h3>
+                    
+                    <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-orange-400 to-transparent"></div>
+                        <h4 class="text-lg font-bold text-white mb-1">IT Support Professional</h4>
+                        <div class="text-orange-400 text-sm mb-3">Google Certificate</div>
+                        <p class="text-slate-400 text-sm font-light leading-relaxed">
+                            Rigorous training in troubleshooting, customer service, networking, operating systems, and security basics.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-orange-400 to-transparent"></div>
+                        <h4 class="text-lg font-bold text-white mb-1">Web Support & Hosting</h4>
+                        <div class="text-orange-400 text-sm mb-3">Specialized Coursework</div>
+                        <p class="text-slate-400 text-sm font-light leading-relaxed">
+                            Training focused on delivering exceptional web support, with a specific emphasis on guiding users through game server hosting setups.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 border-t border-white/5 text-center mt-12 relative z-10">
+        <p class="text-slate-500 text-sm">
+            © <script>document.write(new Date().getFullYear())</script> Maher Alsheikh. All rights reserved. <br>
+            <span class="text-xs opacity-60">Based in Montreal, Quebec, Canada.</span>
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Smooth scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            // Check if already in viewport on load to prevent jumping
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                el.classList.add('active');
+            } else {
+                revealOnScroll.observe(el);
+            }
+        });
+
+        // Navbar blur effect on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+        });
+    </script>
+</body>
+</html>
